@@ -91,6 +91,7 @@ def minimax(board, depth, turn):
             bestVal = min(bestVal, value)
         return bestVal            
     """
+    pass
 def evaluate(board,turn):
     #TODO: 
     pass
