@@ -14,19 +14,17 @@ def best_move(board):
             if board[i][j]=="_":
                 return str(i)+str(j)
 
-""" 
+'''
 if board[int(n[0])][0] == board[int(n[0])] and if board[int(n[0])][1] == board[int(n[0])][2]:
     win
-
 if board[0][int(n[1])] == board[1][int(n[1])] and if board[1][int(n[1])] == board[2][int(n[1])]:
     win
-    
 if n[0] == n[1]:
     if board[0][0] == board[1][1] and board[1][1] == board[2][2]:
         win
     if board[0][2] == board[1][1] and board[1][1] == board[2][0]:
         win 
-"""
+'''
     
 def check(board,turn):
     for row in range(3) :     
@@ -36,23 +34,19 @@ def check(board,turn):
                     return "player"
                 else:
                     return "computer"
-    
     for col in range(3) :
-       
         if (board[0][col] == board[1][col] and board[1][col] == board[2][col]) :
             if board[0][col]!="_":
                 if turn==1:
                     return "player"
                 else:
                     return "computer"
-    
     if (board[0][0] == board[1][1] and board[1][1] == board[2][2]) :
         if board[0][0]!="_":
             if turn==1:
                     return "player"
             else:
                     return "computer"
-  
     if (board[0][2] == board[1][1] and board[1][1] == board[2][0]) :
         if board[1][1]!="_":
             if turn==1:
@@ -64,10 +58,11 @@ def check(board,turn):
             if board[i][j]=="_":
                 return None
     return "draw"
+    
 def minimax(board, depth, turn):
     #minimax(board, depth, turn==1) ??
     #TODO: Add minimax algorithm
-    """
+    '''
     if check(board,turn) returns win, loss or draw:
         return value of board
     if turn==1:
@@ -78,7 +73,6 @@ def minimax(board, depth, turn):
             value = minimax(board, depth+1, 1-turn)
             #value = minimax(board, depth+1, 0) also possible??
             bestVal = max(bestVal, value)
-            
         return bestVal
     else:
         if depth = diffficulty_depth: #Check TODO: after hardest
@@ -90,11 +84,32 @@ def minimax(board, depth, turn):
             
             bestVal = min(bestVal, value)
         return bestVal            
-    """
+    '''
     pass
+    
 def evaluate(board,turn):
-    #TODO: 
-    pass
+    #TODO: Add Evaluation Function
+    #Computer : Maximizer & Player : Minimizer
+    #Checking the Rows
+    for row in range(3):
+        if board[row][0]==board[row][1] and board[row][1]==board[row][2]:
+            if board[row][0]=="O":
+                return -10
+            return 10
+    #Checking the Columns
+    for col in range(3):
+        if board[0][col]==board[1][col] and board[1][col]==board[2][col]:
+            if board[0][col]=="O":
+                return -10
+            return 10
+    #Checking the Diagonals
+    if ( board[0][0]==board[1][1] and board[1][1]==board[2][2] ) or ( board[0][2]==board[1][1] and board[1][1]==board[2][0] ):
+        if board[1][1]=="O":
+                return -10
+            return 10
+    #Incase of Draw
+    return 0
+    
 print("Welcome to Tic Tac Toe!")
 print("This is a 3x3 board. Enter the coordinates of the square you want to place your X or O in.")
 print("The first player to get three in a row wins!")
