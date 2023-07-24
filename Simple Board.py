@@ -97,67 +97,56 @@ def minimax(board, depth, turn):
     pass
 
 
-def evaluate(board):
-    # checking for computer as winner
-    # checking diagonals
-    if board[1][1] == "X" and board[0][0] == "X" and board[2][2] == "X":
-        return 11
-    if board[1][1] == "X" and board[0][2] == "X" and board[2][0] == "X":
-        return 11
+def evaluate(board, turn):
+    if turn == 0:
+        # checking PLAYER as winner
 
-    # checking horizontals
-    if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X":
-        return 11
-    if board[1][0] == "X" and board[1][1] == "X" and board[1][2] == "X":
-        return 11
-    if board[2][0] == "X" and board[2][1] == "X" and board[2][2] == "X":
-        return 11
+        # checking diagonals
+        if board[1][1] == "O" and board[0][0] == "O" and board[2][2] == "O":
+            return -11
+        if board[1][1] == "O" and board[0][2] == "O" and board[2][0] == "O":
+            return -11
 
-    # checking verticals
-    if board[0][0] == "X" and board[1][0] == "X" and board[2][0] == "X":
-        return 11
-    if board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X":
-        return 11
-    if board[0][2] == "X" and board[1][2] == "X" and board[2][2] == "X":
-        return 11
-    """
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    """
+        # checking horizontals
+        if board[0][0] == "O" and board[0][1] == "O" and board[0][2] == "O":
+            return -11
+        if board[1][0] == "O" and board[1][1] == "O" and board[1][2] == "O":
+            return -11
+        if board[2][0] == "O" and board[2][1] == "O" and board[2][2] == "O":
+            return -11
 
-    # checking for player as winner
-    # checking diagonals
-    if board[1][1] == "O" and board[0][0] == "O" and board[2][2] == "O":
-        return -11
-    if board[1][1] == "O" and board[0][2] == "O" and board[2][0] == "O":
-        return -11
+        # checking verticals
+        if board[0][0] == "O" and board[1][0] == "O" and board[2][0] == "O":
+            return -11
+        if board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O":
+            return -11
+        if board[0][2] == "O" and board[1][2] == "O" and board[2][2] == "O":
+            return -11
 
-    # checking horizontals
-    if board[0][0] == "O" and board[0][1] == "O" and board[0][2] == "O":
-        return -11
-    if board[1][0] == "O" and board[1][1] == "O" and board[1][2] == "O":
-        return -11
-    if board[2][0] == "O" and board[2][1] == "O" and board[2][2] == "O":
-        return -11
+    elif turn == 1:
+        # checking COMPUTER as winner
 
-    # checking verticals
-    if board[0][0] == "O" and board[1][0] == "O" and board[2][0] == "O":
-        return -11
-    if board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O":
-        return -11
-    if board[0][2] == "O" and board[1][2] == "O" and board[2][2] == "O":
-        return -11
+        # checking diagonals
+        if board[1][1] == "X" and board[0][0] == "X" and board[2][2] == "X":
+            return 11
+        if board[1][1] == "X" and board[0][2] == "X" and board[2][0] == "X":
+            return 11
+
+        # checking horizontals
+        if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X":
+            return 11
+        if board[1][0] == "X" and board[1][1] == "X" and board[1][2] == "X":
+            return 11
+        if board[2][0] == "X" and board[2][1] == "X" and board[2][2] == "X":
+            return 11
+
+        # checking verticals
+        if board[0][0] == "X" and board[1][0] == "X" and board[2][0] == "X":
+            return 11
+        if board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X":
+            return 11
+        if board[0][2] == "X" and board[1][2] == "X" and board[2][2] == "X":
+            return 11
 
     # if none of them win
     return 0
