@@ -139,25 +139,25 @@ def evaluate(board):
     # checking for player as winner
     # checking diagonals
     if board[1][1] == "O" and board[0][0] == "O" and board[2][2] == "O":
-        return 11
+        return -11
     if board[1][1] == "O" and board[0][2] == "O" and board[2][0] == "O":
-        return 11
+        return -11
 
     # checking horizontals
     if board[0][0] == "O" and board[0][1] == "O" and board[0][2] == "O":
-        return 11
+        return -11
     if board[1][0] == "O" and board[1][1] == "O" and board[1][2] == "O":
-        return 11
+        return -11
     if board[2][0] == "O" and board[2][1] == "O" and board[2][2] == "O":
-        return 11
+        return -11
 
     # checking verticals
     if board[0][0] == "O" and board[1][0] == "O" and board[2][0] == "O":
-        return 11
+        return -11
     if board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O":
-        return 11
+        return -11
     if board[0][2] == "O" and board[1][2] == "O" and board[2][2] == "O":
-        return 11
+        return -11
 
     # if none of them win
     return 0
