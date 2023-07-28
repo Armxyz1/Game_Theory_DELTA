@@ -8,6 +8,19 @@ def best_move(board):
             bestMove=currentMove
     return bestMove
     '''
+    best=-1000
+    move=(-1,-1)
+    for i in range(3):
+        for j in range(3):
+            if board[i][j]=="_":
+                board[i][j]="x"
+                val=minimax(board,0,0)
+                board[i][j]="_"
+                best=max(best,val)
+                if val>best:                
+                    move=(i,j)
+                    best=val
+    return move
     #Bad algorithm:
     for i in range(3):
         for j in range(3):
@@ -62,6 +75,30 @@ def check(board,turn):
 def minimax(board, depth, turn):
     #minimax(board, depth, turn==1) ??
     #TODO: Add minimax algorithm
+    score=evaluate(board)
+    if score==10 or score==-10:
+        return score
+    #Computer's Turn : Maximizer
+    if turn:
+        best=-1000
+        for i in range(3):
+            for j in range(3):
+                if board[i][j]=="_":
+                    board[i][j]="x"
+                    val=minimax(board,depth+1,0)
+                    best=max(best,val)
+                    board[i][j]="_"
+    #Player's Turn : Minimizer
+    else:
+        best=+1000
+        for i in range(3):
+            for j in range(3):
+                if board[i][j]=="_":
+                    board[i][j]="o"
+                    val=minimax(board,depth+1,1)
+                    best=min(best,val)
+                    board[i][j]="_"
+    return best
     '''
     if check(board,turn) returns win, loss or draw:
         return value of board
@@ -87,25 +124,28 @@ def minimax(board, depth, turn):
     '''
     pass
     
-def evaluate(board,turn):
+def evaluate(board):
     #TODO: Add Evaluation Function
     #Computer : Maximizer & Player : Minimizer
     #Checking the Rows
     for row in range(3):
         if board[row][0]==board[row][1] and board[row][1]==board[row][2]:
-            if board[row][0]=="O":
+            if board[row][0]=="o":
                 return -10
-            return 10
+            elif board[row][0]=="x":
+                return 10
     #Checking the Columns
     for col in range(3):
         if board[0][col]==board[1][col] and board[1][col]==board[2][col]:
-            if board[0][col]=="O":
+            if board[0][col]=="o":
                 return -10
-            return 10
+            elif board[0][col]=="x":
+                return 10
     #Checking the Diagonals
     if ( board[0][0]==board[1][1] and board[1][1]==board[2][2] ) or ( board[0][2]==board[1][1] and board[1][1]==board[2][0] ):
-        if board[1][1]=="O":
-                return -10
+        if board[1][1]=="o":
+            return -10
+        elif board[1][1]=="x":
             return 10
     #Incase of Draw
     return 0
