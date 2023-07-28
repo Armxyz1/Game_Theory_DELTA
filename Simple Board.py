@@ -8,11 +8,19 @@ def best_move(board):
             bestMove=currentMove
     return bestMove
     """
-    # Bad algorithm:
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == "_":
-                return str(i) + str(j)
+    bestMove = ""
+    # for all moves
+    currentMoveValue = 0
+    bestMoveValue = -1000000000
+    for x in range(3):
+        for y in range(3):
+            currentMoveValue = minimax(board, 0)
+            if currentMoveValue > bestMoveValue:
+                bestMove += str(x)
+                bestMove += str(y)
+
+    # returning
+    return bestMove
 
 
 """ 
@@ -67,7 +75,7 @@ def check(board, turn):
     return "draw"
 
 
-def minimax(board, depth, turn):
+def minimax(board, turn):
     # minimax(board, depth, turn==1) ??
     # TODO: Add minimax algorithm
     """
@@ -94,7 +102,74 @@ def minimax(board, depth, turn):
             bestVal = min(bestVal, value)
         return bestVal
     """
-    pass
+    # base case
+    if check(board, turn) != None:
+        if check(board, turn) == "player":
+            return -11
+        elif check(board, turn) == "computer":
+            return 11
+        elif check(board, turn) == "draw":
+            return 0
+    else:
+        if turn == 1:
+            bestValue = -1000000000
+
+            # for all moves
+            for i in range(3):
+                for j in range(3):
+                    if board[i][j] == "_":
+                        # placing move
+                        board[i][j] = "X"
+
+                        # recursion
+                        value = minimax(board, 0)
+
+                        # checking
+                        if value > bestValue:
+                            bestValue = value
+
+                        # removing move
+                        board[i][j] = "_"
+            # retunrning
+            return bestValue
+
+        elif turn == 0:
+            bestValue = +1000000000
+
+            # for all moves
+            for i in range(3):
+                for j in range(3):
+                    if board[i][j] == "_":
+                        # placing move
+                        board[i][j] = "O"
+
+                        # recursion
+                        value = minimax(board, 1)
+
+                        # checking
+                        if value < bestValue:
+                            bestValue = value
+
+                        # removing move
+                        board[i][j] = "_"
+            # returning
+            return bestValue
+
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 
 
 def evaluate(board, turn):
@@ -152,6 +227,18 @@ def evaluate(board, turn):
     return 0
 
 
+"""
+
+
+
+
+
+
+
+
+
+"""
+
 print("Welcome to Tic Tac Toe!")
 print(
     "This is a 3x3 board. Enter the coordinates of the square you want to place your X or O in."
@@ -177,14 +264,14 @@ while True:
                     print("That space is already taken!")
                     n = input("Your move:")
                 else:
-                    board[int(n[0])][int(n[1])] = "o"
+                    board[int(n[0])][int(n[1])] = "O"
                     break
             else:
                 broke = True
                 break
     elif turn == 1:
         move = best_move(board)
-        board[int(move[0])][int(move[1])] = "x"
+        board[int(move[0])][int(move[1])] = "X"
     if broke:
         break
     turn = 1 - turn
