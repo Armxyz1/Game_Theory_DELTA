@@ -16,7 +16,6 @@ def best_move(board):
                 board[i][j]="x"
                 val=minimax(board,0,0)
                 board[i][j]="_"
-                best=max(best,val)
                 if val>best:                
                     move=(i,j)
                     best=val
@@ -78,6 +77,8 @@ def minimax(board, depth, turn):
     score=evaluate(board)
     if score==10 or score==-10:
         return score
+    if check(board,turn)=="draw":
+        return 0
     #Computer's Turn : Maximizer
     if turn:
         best=-1000
