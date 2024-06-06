@@ -1,3 +1,2 @@
 # Game_Theory_DELTA
-Week 1( Till 17 July):
-Complete the GUI
+3x3 Python Tic-Tac-Toe
